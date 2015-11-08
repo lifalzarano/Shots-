@@ -3,6 +3,7 @@ package com.example.laurenfalzarano.shots;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +28,6 @@ public class ShotsListAdapter extends BaseAdapter {
 
     public ShotsListAdapter(Context context) {
         this.context = context;
-
-//        app_preferences = PreferenceManager.getDefaultSharedPreferences(context);
-//        Set<String> set = app_preferences.getStringSet("shotsList", null);
-//
-//        if (set != null) {
-//            Iterator iter = set.iterator();
-//            while (iter.hasNext()) {
-//                names.add(iter.next().toString());
-//            }
-//        }
-
         this.names = PreferencesManager.get().getShotsArray();
     }
 

@@ -46,25 +46,6 @@ public class AddCounterActivity extends AppCompatActivity {
                 preferences.incrementShots(name);
                 nameField.setText("");
 
-//                //Retrieve the values
-//                Set<String> set = app_preferences.getStringSet("shotsList", null);
-//                Set<String> newSet = new HashSet<>();
-//
-//                if (set != null) {
-//                    // Do deep copy
-//                    Iterator iter = set.iterator();
-//                    while (iter.hasNext()) {
-//                        newSet.add(iter.next().toString());
-//                    }
-//                }
-
-                //Set the values
-//
-//                newSet.add(name);
-//                editor.putStringSet("shotsList", newSet);
-//                editor.commit();
-//                System.out.println(app_preferences.getStringSet("shotsList", null));
-
                 if (count > 1) {
                     Toast.makeText(getApplicationContext(), "The shots counter for " + name + " has been incremented.", Toast.LENGTH_LONG).show();
                 } else {

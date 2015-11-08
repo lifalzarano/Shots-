@@ -49,18 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
         shotsList = (ListView) findViewById(R.id.shots_list);
 
-        Set<String> set = PreferencesManager.get().getSet();
-
-        if (set == null) {
-            set = new HashSet<>();
-        } else {
-            noShotsText.setText("");
-            Log.d("Set ", set.toString());
-        }
-
         // Convert string set to array list
         List<String> shotsArray = PreferencesManager.get().getShotsArray();
-        shotsArray.addAll(set);
+        if (shotsArray != null) {
+            noShotsText.setText("");
+            Log.d("Set ", shotsArray.toString());
+        }
 
         // Add existing shots lists to main list
         ShotsListAdapter shotsListAdapter = new ShotsListAdapter(this);
@@ -81,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                             long id) {
 
     //    String name = subjectsAdapter.getItem(position);
+        String name = PreferencesManager.get().getShotsArray().get(position);
+        Log.d("MainActivity", "Name: " + name);
         Intent intent = new Intent(this, AddCounterActivity.class);
     //    intent.putExtra("subject", subject);
 

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.laurenfalzarano.shots.Application.MyApplication;
 
@@ -21,7 +22,7 @@ public class PreferencesManager {
 
     private static PreferencesManager instance;
     public SharedPreferences preferences;
-    private List<String> shotsArray = new ArrayList<>();
+    private List<String> shotsArray;
 
     public static PreferencesManager get() {
         if (instance == null) {
@@ -86,14 +87,20 @@ public class PreferencesManager {
             }
         }
 
-        shotsArray.addAll(set);
-        Collections.sort(shotsArray);
-
         return newSet;
     }
 
     public List<String> getShotsArray() {
-        return shotsArray;
+        Set<String> set = preferences.getStringSet("shotsList", null);
+
+        this.shotsArray = new ArrayList<>();
+//        Log.d("New ShotsArray", shotsArray.toString());
+        this.shotsArray.addAll(set);
+        Collections.sort(shotsArray);
+//        Log.d("ShotsArray sorted", shotsArray.toString());
+
+//        Log.d("GetShotsArray", shotsArray.toString());
+        return this.shotsArray;
     }
 
 
