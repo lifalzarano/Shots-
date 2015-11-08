@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Shots!</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add">Settings</string>
+    <string name="title_activity_add_counter">Add Shots Counter</string>
+    <string name="no_shots">You haven\'t created any shots counters. Click the plus button to make a new one!</string>
+
+    <string name="fa_angle_left">{fa-angle-left}</string>
+    <string name="title_activity_shots">Edit Shots Counter</string>
+    <string name="fa_angle_right">{fa-angle-right}</string>
+</resources>
