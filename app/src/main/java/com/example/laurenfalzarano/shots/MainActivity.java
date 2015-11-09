@@ -33,6 +33,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
         if (shotsArray != null) {
             noShotsText.setText("");
             Log.d("Set ", shotsArray.toString());
-        }
 
-        // Add existing shots lists to main list
-        ShotsListAdapter shotsListAdapter = new ShotsListAdapter(this);
-        shotsList.setAdapter(shotsListAdapter);
+            // Add existing shots lists to main list
+            ShotsListAdapter shotsListAdapter = new ShotsListAdapter(this);
+            shotsList.setAdapter(shotsListAdapter);
+        }
 
     }
 
@@ -78,9 +79,20 @@ public class MainActivity extends AppCompatActivity {
         String name = PreferencesManager.get().getShotsArray().get(position);
         Log.d("MainActivity", "Name: " + name);
         Intent intent = new Intent(this, AddCounterActivity.class);
-    //    intent.putExtra("subject", subject);
+        intent.putExtra("name", name);
 
         startActivity(intent);
+
+    }
+
+    @OnItemLongClick(R.id.shots_list)
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+        String name = PreferencesManager.get().getShotsArray().get(position);
+        PreferencesManager.get().removeShotsCounter(name);
+        Log.d("MainActivity:remove", "Name: " + name);
+
+        return true;
 
     }
 

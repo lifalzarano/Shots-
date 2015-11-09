@@ -49,21 +49,32 @@ public class PreferencesManager {
         return count;
     }
 
-    public void incrementShots(String name) {
-        int count = getShots(name);
-
+    public void setShotsCount(String name, int count) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(name, ++count);
+        editor.putInt(name, count);
         editor.commit();
         System.out.println("Shots count after update: " + preferences.getInt(name, 0));
 
         updateSet(name);
     }
 
-    public void decrementShot(String name) {
+    public void incrementShots(String name) {
+        int count = getShots(name);
+        setShotsCount(name, ++count);
+    }
+
+    public void decrementShotCount(String name) {
         int count = getShots(name);
         count--;
         preferences.edit().putInt(name, count).apply();
+    }
+
+    public void changeCounterName(String oldName, String newName) {
+        Set<String> set = getSet();
+        set.remove(oldName);
+        set.add(newName);
+        preferences.edit().putStringSet("shotsList", set).commit();
+        Log.d("Change counter name", preferences.getStringSet("shotsList", null).toString());
     }
 
     private void updateSet(String name) {
@@ -73,6 +84,14 @@ public class PreferencesManager {
         set.add(name);
         preferences.edit().putStringSet("shotsList", set).commit();
         System.out.println(preferences.getStringSet("shotsList", null));
+    }
+
+    public void removeShotsCounter(String name) {
+        Set<String> set = getSet();
+        set.remove(name);
+        preferences.edit().putStringSet("shotsList", set).commit();
+
+        Log.d("PM:removeShotsCounter", preferences.getStringSet("shotsList", null).toString());
     }
 
     public Set<String> getSet() {
@@ -93,14 +112,15 @@ public class PreferencesManager {
     public List<String> getShotsArray() {
         Set<String> set = preferences.getStringSet("shotsList", null);
 
-        this.shotsArray = new ArrayList<>();
+        shotsArray = new ArrayList<>();
 //        Log.d("New ShotsArray", shotsArray.toString());
-        this.shotsArray.addAll(set);
-        Collections.sort(shotsArray);
-//        Log.d("ShotsArray sorted", shotsArray.toString());
-
-//        Log.d("GetShotsArray", shotsArray.toString());
-        return this.shotsArray;
+        if (set != null) {
+            shotsArray.addAll(set);
+            Collections.sort(shotsArray);
+            return shotsArray;
+        } else {
+            return null;
+        }
     }
 
 

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Potato"
-        android:gravity="right|center_vertical"
+        android:gravity="left|center_vertical"
         android:layout_alignParentLeft="true"
         android:paddingRight="35dp"
         android:textSize="18sp"
@@ -21,11 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="7dp"
-        android:gravity="right|center_vertical"
+        android:gravity="right|center"
         android:layout_alignParentRight="true"
-        android:background="@drawable/circle"
         android:text="8"
         android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
         />
 
 </RelativeLayout>

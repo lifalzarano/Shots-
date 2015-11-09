@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".AddCounterActivity"
-            android:label="@string/title_activity_add_counter" >
+            android:label="@string/title_activity_add_counter"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.laurenfalzarano.shots.MainActivity" />

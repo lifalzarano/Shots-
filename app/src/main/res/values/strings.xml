@@ -7,6 +7,8 @@
     <string name="title_activity_add_counter">Add Shots Counter</string>
     <string name="no_shots">You haven\'t created any shots counters. Click the plus button to make a new one!</string>
 
+    <string name="initial_count">1</string>
+
     <string name="fa_angle_left">{fa-angle-left}</string>
     <string name="title_activity_shots">Edit Shots Counter</string>
     <string name="fa_angle_right">{fa-angle-right}</string>

@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class ShotsListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> names = new ArrayList<>();
+    private List<String> names;
 
     public ShotsListAdapter(Context context) {
         this.context = context;
