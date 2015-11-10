@@ -78,9 +78,9 @@ public class PreferencesManager {
         return preferences.getStringSet(SHOT_COUNTER_LIST_KEY, new HashSet<String>());
     }
 
-    public List<String> getShotsCounterList() {
+    public List<String> getShotCounterList() {
         Set<String> shotCounterSet = getShotCounterSet();
-        List<String> shotCounterList = new ArrayList<String>(shotCounterSet);
+        List<String> shotCounterList = new ArrayList<>(shotCounterSet);
         Collections.sort(shotCounterList);
         return shotCounterList;
     }

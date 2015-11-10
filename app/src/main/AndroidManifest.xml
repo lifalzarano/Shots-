@@ -22,6 +22,11 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
+            android:name=".Activities.SettingsActivity"
+            android:label="@string/shot_counter_form_label"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
             android:name=".Activities.ShotsActivity"
             android:label="@string/title_activity_shots"
             android:theme="@style/AppTheme.NoActionBar" >

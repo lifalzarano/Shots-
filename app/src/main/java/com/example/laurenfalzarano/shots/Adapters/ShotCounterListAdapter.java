@@ -18,15 +18,15 @@ import butterknife.ButterKnife;
 /**
  * Created by laurenfalzarano on 11/6/15.
  */
-public class ShotsListAdapter extends BaseAdapter {
+public class ShotCounterListAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> names;
     private TextView noShotCounters;
 
-    public ShotsListAdapter(Context context, TextView noShotCounters) {
+    public ShotCounterListAdapter(Context context, TextView noShotCounters) {
         this.context = context;
-        this.names = PreferencesManager.get().getShotsCounterList();
+        this.names = PreferencesManager.get().getShotCounterList();
         this.noShotCounters = noShotCounters;
         setNoContent();
     }
@@ -34,6 +34,11 @@ public class ShotsListAdapter extends BaseAdapter {
     public void setNoContent() {
         int noContentVisibility = names.size() == 0 ? View.VISIBLE : View.GONE;
         noShotCounters.setVisibility(noContentVisibility);
+    }
+
+    public void refreshContent() {
+        names = PreferencesManager.get().getShotCounterList();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -52,7 +57,7 @@ public class ShotsListAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder {
-        @Bind(R.id.count) public TextView shotsCount;
+        @Bind(R.id.count) TextView shotsCount;
         @Bind(R.id.list_name)TextView listName;
 
         public ViewHolder(View view) {
@@ -71,7 +76,7 @@ public class ShotsListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        String count = Integer.toString(PreferencesManager.get().getNumShotsForCounter(names.get(position)));
+        String count = String.valueOf(PreferencesManager.get().getNumShotsForCounter(names.get(position)));
 
         holder.listName.setText(names.get(position));
         holder.shotsCount.setText(count);

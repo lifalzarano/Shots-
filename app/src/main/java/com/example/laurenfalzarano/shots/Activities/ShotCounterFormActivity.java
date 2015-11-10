@@ -3,7 +3,6 @@ package com.example.laurenfalzarano.shots.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShotCounterFormActivity extends AppCompatActivity {
+public class ShotCounterFormActivity extends StandardActivity {
 
     public static final String SHOT_COUNTER_NAME_KEY = "shotCounterName";
 
