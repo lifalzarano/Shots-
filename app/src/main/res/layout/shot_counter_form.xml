@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/fa_angle_left"
-                android:textSize="30dp" />
+                android:textSize="50dp" />
 
             <EditText
                 android:id="@+id/shots_count"
@@ -47,8 +47,8 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:text="@string/initial_count"
                 android:textSize="30dp"
                 android:inputType="number"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/fa_angle_right"
-                android:textSize="30dp" />
+                android:textSize="50dp" />
 
         </LinearLayout>
 

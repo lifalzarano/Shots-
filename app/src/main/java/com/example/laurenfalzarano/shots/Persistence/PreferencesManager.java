@@ -72,6 +72,7 @@ public class PreferencesManager {
     public void removeShotsCounter(String name) {
         Set<String> shotCounterSet = getShotCounterSet();
         shotCounterSet.remove(name);
+        preferences.edit().remove(name).apply();
         setShotCounterList(shotCounterSet);
     }
 

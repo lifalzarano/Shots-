@@ -11,7 +11,7 @@
     <string name="title_activity_shots">Edit Shots Counter</string>
     <string name="fa_angle_right">{fa-angle-right}</string>
 
-    <string name="confirm_deletion_title">Confirm Shot Counter Deletion</string>
+    <string name="confirm_deletion_title">Confirm Deletion</string>
     <string name="confirm_deletion_content">Are you sure you want to delete the shot counter \"</string>
 
     <string name="welcome">Welcome</string>
