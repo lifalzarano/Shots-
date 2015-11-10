@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,20 +18,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddCounterActivity"
+            android:name=".Activities.AddCounterActivity"
             android:label="@string/title_activity_add_counter"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.laurenfalzarano.shots.MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".ShotsActivity"
+            android:name=".Activities.ShotsActivity"
             android:label="@string/title_activity_shots"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.laurenfalzarano.shots.MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
     </application>
 

@@ -1,6 +1,5 @@
-package com.example.laurenfalzarano.shots;
+package com.example.laurenfalzarano.shots.Persistence;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -44,7 +43,6 @@ public class PreferencesManager {
     }
 
     public int getShots(String name) {
-
         int count = preferences.getInt(name, 0);
         return count;
     }
@@ -122,6 +120,4 @@ public class PreferencesManager {
             return null;
         }
     }
-
-
 }
