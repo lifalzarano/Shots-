@@ -2,6 +2,7 @@ package com.example.laurenfalzarano.shots.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,10 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.laurenfalzarano.shots.Adapters.ShotCounterListAdapter;
 import com.example.laurenfalzarano.shots.Persistence.PreferencesManager;
 import com.example.laurenfalzarano.shots.R;
-import com.example.laurenfalzarano.shots.Utils.FormUtils;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
@@ -42,6 +44,15 @@ public class MainActivity extends StandardActivity {
         addShotCounter.setImageDrawable(new IconDrawable(this, FontAwesomeIcons.fa_plus)
                 .colorRes(R.color.white)
                 .actionBarSize());
+
+        if (PreferencesManager.get().getFirstTimeUser()) {
+            PreferencesManager.get().setFirstTimeUser(false);
+            new MaterialDialog.Builder(this)
+                    .title(R.string.welcome)
+                    .content(R.string.ask_for_help)
+                    .positiveText(android.R.string.yes)
+                    .show();
+        }
     }
 
     @Override
@@ -59,9 +70,22 @@ public class MainActivity extends StandardActivity {
     }
 
     @OnItemLongClick(R.id.shots_list)
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        String name = PreferencesManager.get().getShotCounterList().get(position);
-        PreferencesManager.get().removeShotsCounter(name);
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+        final String shotCounterName = shotCounterListAdapter.getItem(position);
+        String message = getString(R.string.confirm_deletion_content) + shotCounterName + "\"?";
+        new MaterialDialog.Builder(this)
+                .title(R.string.confirm_deletion_title)
+                .content(message)
+                .positiveText(android.R.string.yes)
+                .negativeText(android.R.string.no)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        PreferencesManager.get().removeShotsCounter(shotCounterName);
+                        shotCounterListAdapter.removeShotCounter(position);
+                    }
+                })
+                .show();
         return true;
     }
 

@@ -21,6 +21,7 @@ public class PreferencesManager {
     public SharedPreferences preferences;
 
     private static final String SHOT_COUNTER_LIST_KEY = "shotCounterList";
+    private static final String FIRST_TIME_KEY = "firstTime";
 
     public static PreferencesManager get() {
         if (instance == null) {
@@ -83,5 +84,13 @@ public class PreferencesManager {
         List<String> shotCounterList = new ArrayList<>(shotCounterSet);
         Collections.sort(shotCounterList);
         return shotCounterList;
+    }
+
+    public boolean getFirstTimeUser() {
+        return preferences.getBoolean(FIRST_TIME_KEY, true);
+    }
+
+    public void setFirstTimeUser(boolean firstTimeUser) {
+        preferences.edit().putBoolean(FIRST_TIME_KEY, firstTimeUser).apply();
     }
 }

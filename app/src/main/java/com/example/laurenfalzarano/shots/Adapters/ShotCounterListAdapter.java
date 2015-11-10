@@ -41,6 +41,12 @@ public class ShotCounterListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeShotCounter(int position) {
+        names.remove(position);
+        notifyDataSetChanged();
+        setNoContent();
+    }
+
     @Override
     public int getCount() {
         return names.size();
