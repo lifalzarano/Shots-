@@ -55,7 +55,7 @@ public class ShotCounterFormActivity extends StandardActivity {
         if (shotCounterName.trim().isEmpty()) {
             Snackbar.make(parent, R.string.no_blank_names, Snackbar.LENGTH_LONG).show();
         }
-        else if (PreferencesManager.get().isCounterNameTaken(shotCounterName)) {
+        else if (PreferencesManager.get().isCounterNameTaken(shotCounterName) && !editMode) {
             Snackbar.make(parent, R.string.no_duplicate_counters, Snackbar.LENGTH_LONG).show();
         }
         else {
