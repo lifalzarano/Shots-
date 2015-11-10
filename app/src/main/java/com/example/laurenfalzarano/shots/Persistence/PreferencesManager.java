@@ -3,14 +3,12 @@ package com.example.laurenfalzarano.shots.Persistence;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.example.laurenfalzarano.shots.Application.MyApplication;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +19,8 @@ public class PreferencesManager {
 
     private static PreferencesManager instance;
     public SharedPreferences preferences;
-    private List<String> shotsArray;
+
+    private static final String SHOT_COUNTER_LIST_KEY = "shotCounterList";
 
     public static PreferencesManager get() {
         if (instance == null) {
@@ -42,82 +41,55 @@ public class PreferencesManager {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public int getShots(String name) {
-        int count = preferences.getInt(name, 0);
-        return count;
+    public int getNumShotsForCounter(String name) {
+        return preferences.getInt(name, 0);
     }
 
-    public void setShotsCount(String name, int count) {
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(name, count);
-        editor.commit();
-        System.out.println("Shots count after update: " + preferences.getInt(name, 0));
-
-        updateSet(name);
-    }
-
-    public void incrementShots(String name) {
-        int count = getShots(name);
-        setShotsCount(name, ++count);
-    }
-
-    public void decrementShotCount(String name) {
-        int count = getShots(name);
-        count--;
-        preferences.edit().putInt(name, count).apply();
+    public void setShotsCount(String shotCounterName, int count) {
+        preferences.edit().putInt(shotCounterName, count).apply();
     }
 
     public void changeCounterName(String oldName, String newName) {
-        Set<String> set = getSet();
+        Set<String> set = getShotCounterSet();
+        int numShots = getNumShotsForCounter(oldName);
         set.remove(oldName);
         set.add(newName);
-        preferences.edit().putStringSet("shotsList", set).commit();
-        Log.d("Change counter name", preferences.getStringSet("shotsList", null).toString());
+        preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, set).apply();
+        setShotsCount(newName, numShots);
     }
 
-    private void updateSet(String name) {
-        //Retrieve the values
-        Set<String> set = getSet();
+    public void incrementShots(String shotCounterName) {
+        int count = getNumShotsForCounter(shotCounterName);
+        setShotsCount(shotCounterName, ++count);
+    }
 
+    public void decrementShotCount(String shotCounterName) {
+        int count = getNumShotsForCounter(shotCounterName);
+        count--;
+        preferences.edit().putInt(shotCounterName, count).apply();
+    }
+
+    public void addShotCounterSet(String name) {
+        // Retrieve the values
+        Set<String> set = getShotCounterSet();
         set.add(name);
-        preferences.edit().putStringSet("shotsList", set).commit();
-        System.out.println(preferences.getStringSet("shotsList", null));
+        preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, set).apply();
     }
 
     public void removeShotsCounter(String name) {
-        Set<String> set = getSet();
-        set.remove(name);
-        preferences.edit().putStringSet("shotsList", set).commit();
-
-        Log.d("PM:removeShotsCounter", preferences.getStringSet("shotsList", null).toString());
+        Set<String> shotCounterSet = getShotCounterSet();
+        shotCounterSet.remove(name);
+        preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, shotCounterSet).apply();
     }
 
-    public Set<String> getSet() {
-        Set<String> set = preferences.getStringSet("shotsList", null);
-        Set<String> newSet = new HashSet<>();
-
-        if (set != null) {
-            // Do deep copy
-            Iterator iter = set.iterator();
-            while (iter.hasNext()) {
-                newSet.add(iter.next().toString());
-            }
-        }
-
-        return newSet;
+    private Set<String> getShotCounterSet() {
+        return preferences.getStringSet(SHOT_COUNTER_LIST_KEY, new HashSet<String>());
     }
 
-    public List<String> getShotsArray() {
-        Set<String> set = preferences.getStringSet("shotsList", null);
-
-        shotsArray = new ArrayList<>();
-//        Log.d("New ShotsArray", shotsArray.toString());
-        if (set != null) {
-            shotsArray.addAll(set);
-            Collections.sort(shotsArray);
-            return shotsArray;
-        } else {
-            return null;
-        }
+    public List<String> getShotsCounterList() {
+        Set<String> shotCounterSet = getShotCounterSet();
+        List<String> shotCounterList = new ArrayList<String>(shotCounterSet);
+        Collections.sort(shotCounterList);
+        return shotCounterList;
     }
 }

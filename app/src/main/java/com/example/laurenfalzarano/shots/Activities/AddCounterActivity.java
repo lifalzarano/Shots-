@@ -47,7 +47,7 @@ public class AddCounterActivity extends AppCompatActivity {
             counterName.setText(name);
             counterName.setGravity(Gravity.CENTER_HORIZONTAL);
             shotsCount.requestFocus();
-            shotsCount.setText(Integer.toString(PreferencesManager.get().getShots(name)));
+            shotsCount.setText(Integer.toString(PreferencesManager.get().getNumShotsForCounter(name)));
             shotsCount.setFocusable(false);
             submitCounter.setText("UPDATE");
         }
@@ -65,7 +65,7 @@ public class AddCounterActivity extends AppCompatActivity {
 
                 if (!editMode) {
                     // Get number of existing shots for this name
-                    int oldCount = preferences.getShots(newName);
+                    int oldCount = preferences.getNumShotsForCounter(newName);
                     Log.d(newName, Integer.toString(oldCount));
 
                     // Set the counter

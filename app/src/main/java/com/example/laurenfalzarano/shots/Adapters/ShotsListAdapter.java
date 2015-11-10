@@ -25,7 +25,7 @@ public class ShotsListAdapter extends BaseAdapter {
 
     public ShotsListAdapter(Context context) {
         this.context = context;
-        this.names = PreferencesManager.get().getShotsArray();
+        this.names = PreferencesManager.get().getShotsCounterList();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ShotsListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        String count = Integer.toString(PreferencesManager.get().getShots(names.get(position)));
+        String count = Integer.toString(PreferencesManager.get().getNumShotsForCounter(names.get(position)));
 
         holder.listName.setText(names.get(position));
         holder.shotsCount.setText(count);

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         shotsList = (ListView) findViewById(R.id.shots_list);
 
         // Convert string set to array list
-        List<String> shotsArray = PreferencesManager.get().getShotsArray();
+        List<String> shotsArray = PreferencesManager.get().getShotsCounterList();
         if (shotsArray != null) {
             noShotsText.setText("");
             Log.d("Set ", shotsArray.toString());
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             long id) {
 
     //    String name = subjectsAdapter.getItem(position);
-        String name = PreferencesManager.get().getShotsArray().get(position);
+        String name = PreferencesManager.get().getShotsCounterList().get(position);
         Log.d("MainActivity", "Name: " + name);
         Intent intent = new Intent(this, AddCounterActivity.class);
         intent.putExtra("name", name);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     @OnItemLongClick(R.id.shots_list)
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-        String name = PreferencesManager.get().getShotsArray().get(position);
+        String name = PreferencesManager.get().getShotsCounterList().get(position);
         PreferencesManager.get().removeShotsCounter(name);
         Log.d("MainActivity:remove", "Name: " + name);
 
