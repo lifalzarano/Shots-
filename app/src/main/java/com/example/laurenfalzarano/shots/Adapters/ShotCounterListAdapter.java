@@ -28,7 +28,6 @@ public class ShotCounterListAdapter extends BaseAdapter {
         this.context = context;
         this.names = PreferencesManager.get().getShotCounterList();
         this.noShotCounters = noShotCounters;
-        setNoContent();
     }
 
     public void setNoContent() {
@@ -39,6 +38,7 @@ public class ShotCounterListAdapter extends BaseAdapter {
     public void refreshContent() {
         names = PreferencesManager.get().getShotCounterList();
         notifyDataSetChanged();
+        setNoContent();
     }
 
     public void removeShotCounter(int position) {

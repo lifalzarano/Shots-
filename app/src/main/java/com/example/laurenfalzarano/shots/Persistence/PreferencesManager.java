@@ -64,15 +64,20 @@ public class PreferencesManager {
     }
 
     public void addShotCounter(String name) {
-        Set<String> set = getShotCounterSet();
-        set.add(name);
-        preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, set).apply();
+        Set<String> shotCounterSet = getShotCounterSet();
+        shotCounterSet.add(name);
+        setShotCounterList(shotCounterSet);
     }
 
     public void removeShotsCounter(String name) {
         Set<String> shotCounterSet = getShotCounterSet();
         shotCounterSet.remove(name);
-        preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, shotCounterSet).apply();
+        setShotCounterList(shotCounterSet);
+    }
+
+    private void setShotCounterList(Set<String> shotCounterList) {
+        preferences.edit().remove(SHOT_COUNTER_LIST_KEY).apply();
+        preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, shotCounterList).apply();
     }
 
     private Set<String> getShotCounterSet() {
