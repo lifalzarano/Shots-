@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".Activities.SettingsActivity"
-            android:label="@string/shot_counter_form_label"
+            android:label="@string/settings"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
