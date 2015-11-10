@@ -1,19 +1,16 @@
-package com.example.laurenfalzarano.shots;
+package com.example.laurenfalzarano.shots.Adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.example.laurenfalzarano.shots.Persistence.PreferencesManager;
+import com.example.laurenfalzarano.shots.R;
+
 import java.util.List;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,14 +18,33 @@ import butterknife.ButterKnife;
 /**
  * Created by laurenfalzarano on 11/6/15.
  */
-public class ShotsListAdapter extends BaseAdapter {
+public class ShotCounterListAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> names;
+    private TextView noShotCounters;
 
-    public ShotsListAdapter(Context context) {
+    public ShotCounterListAdapter(Context context, TextView noShotCounters) {
         this.context = context;
-        this.names = PreferencesManager.get().getShotsArray();
+        this.names = PreferencesManager.get().getShotCounterList();
+        this.noShotCounters = noShotCounters;
+    }
+
+    public void setNoContent() {
+        int noContentVisibility = names.size() == 0 ? View.VISIBLE : View.GONE;
+        noShotCounters.setVisibility(noContentVisibility);
+    }
+
+    public void refreshContent() {
+        names = PreferencesManager.get().getShotCounterList();
+        notifyDataSetChanged();
+        setNoContent();
+    }
+
+    public void removeShotCounter(int position) {
+        names.remove(position);
+        notifyDataSetChanged();
+        setNoContent();
     }
 
     @Override
@@ -47,7 +63,7 @@ public class ShotsListAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder {
-        @Bind(R.id.count) public TextView shotsCount;
+        @Bind(R.id.count) TextView shotsCount;
         @Bind(R.id.list_name)TextView listName;
 
         public ViewHolder(View view) {
@@ -66,7 +82,7 @@ public class ShotsListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        String count = Integer.toString(PreferencesManager.get().getShots(names.get(position)));
+        String count = String.valueOf(PreferencesManager.get().getNumShotsForCounter(names.get(position)));
 
         holder.listName.setText(names.get(position));
         holder.shotsCount.setText(count);

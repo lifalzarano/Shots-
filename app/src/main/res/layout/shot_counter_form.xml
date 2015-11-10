@@ -1,0 +1,86 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
+
+        <EditText
+            android:id="@+id/counter_name"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_hint"/>
+
+        <LinearLayout
+            android:id="@+id/button_group"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/count_decrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/fa_angle_left"
+                android:textSize="50dp" />
+
+            <EditText
+                android:id="@+id/shots_count"
+                android:imeOptions="actionDone"
+                android:gravity="center"
+                android:background="@drawable/text_input_box"
+                android:padding="5dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:text="@string/initial_count"
+                android:textSize="30dp"
+                android:inputType="number"
+                android:maxLength="3"/>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/count_increment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/fa_angle_right"
+                android:textSize="50dp" />
+
+        </LinearLayout>
+
+        <com.rey.material.widget.Button
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/submit_counter"
+            android:background="@drawable/ripple_button_background"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            app:rd_rippleType="touch"
+            app:rd_backgroundAnimDuration="0"
+            app:rd_backgroundColor="@android:color/transparent"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleAnimDuration="150"
+            app:rd_enable="true"
+            app:rd_delayClick="afterRelease"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
