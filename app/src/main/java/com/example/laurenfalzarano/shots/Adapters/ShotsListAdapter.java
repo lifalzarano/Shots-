@@ -22,10 +22,18 @@ public class ShotsListAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> names;
+    private TextView noShotCounters;
 
-    public ShotsListAdapter(Context context) {
+    public ShotsListAdapter(Context context, TextView noShotCounters) {
         this.context = context;
         this.names = PreferencesManager.get().getShotsCounterList();
+        this.noShotCounters = noShotCounters;
+        setNoContent();
+    }
+
+    public void setNoContent() {
+        int noContentVisibility = names.size() == 0 ? View.VISIBLE : View.GONE;
+        noShotCounters.setVisibility(noContentVisibility);
     }
 
     @Override

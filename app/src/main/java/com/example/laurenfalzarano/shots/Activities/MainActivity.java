@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.example.laurenfalzarano.shots.Adapters.ShotsListAdapter;
 import com.example.laurenfalzarano.shots.Persistence.PreferencesManager;
 import com.example.laurenfalzarano.shots.R;
-
-import java.util.List;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,11 +24,9 @@ import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ListView shotsList;
-
-    @Bind(R.id.no_shots_text) TextView noShotsText;
-    @Bind(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.shots_list) ListView shotCountersList;
+    @Bind(R.id.no_shots_text) TextView noShotCounters;
+    @Bind(R.id.add_shot_counter) FloatingActionButton addShotCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        shotsList = (ListView) findViewById(R.id.shots_list);
-
-        // Convert string set to array list
-        List<String> shotsArray = PreferencesManager.get().getShotsCounterList();
-        if (shotsArray != null) {
-            noShotsText.setText("");
-            Log.d("Set ", shotsArray.toString());
-
-            // Add existing shots lists to main list
-            ShotsListAdapter shotsListAdapter = new ShotsListAdapter(this);
-            shotsList.setAdapter(shotsListAdapter);
-        }
-
+        ShotsListAdapter shotsListAdapter = new ShotsListAdapter(this, noShotCounters);
+        shotCountersList.setAdapter(shotsListAdapter);
+        addShotCounter.setImageDrawable(new IconDrawable(this, FontAwesomeIcons.fa_plus)
+                .colorRes(R.color.white)
+                .actionBarSize());
     }
 
     @Override
@@ -60,31 +50,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     @OnItemClick(R.id.shots_list)
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-
-    //    String name = subjectsAdapter.getItem(position);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String name = PreferencesManager.get().getShotsCounterList().get(position);
         Log.d("MainActivity", "Name: " + name);
         Intent intent = new Intent(this, AddCounterActivity.class);
         intent.putExtra("name", name);
-
         startActivity(intent);
-
     }
 
     @OnItemLongClick(R.id.shots_list)
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
-                                long id) {
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         String name = PreferencesManager.get().getShotsCounterList().get(position);
         PreferencesManager.get().removeShotsCounter(name);
         Log.d("MainActivity:remove", "Name: " + name);
-
         return true;
-
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.add_shot_counter)
     public void onClick(View view) {
         Intent intent = new Intent(this, AddCounterActivity.class);
         startActivity(intent);
