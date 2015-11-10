@@ -6,12 +6,12 @@ import android.support.design.widget.Snackbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.laurenfalzarano.shots.Persistence.PreferencesManager;
 import com.example.laurenfalzarano.shots.R;
 import com.example.laurenfalzarano.shots.Utils.FormUtils;
+import com.rey.material.widget.Button;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
