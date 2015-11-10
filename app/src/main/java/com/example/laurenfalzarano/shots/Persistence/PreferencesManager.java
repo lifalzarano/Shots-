@@ -58,19 +58,11 @@ public class PreferencesManager {
         setShotsCount(newName, numShots);
     }
 
-    public void incrementShots(String shotCounterName) {
-        int count = getNumShotsForCounter(shotCounterName);
-        setShotsCount(shotCounterName, ++count);
+    public boolean isCounterNameTaken(String shotCounterName) {
+        return getShotCounterSet().contains(shotCounterName);
     }
 
-    public void decrementShotCount(String shotCounterName) {
-        int count = getNumShotsForCounter(shotCounterName);
-        count--;
-        preferences.edit().putInt(shotCounterName, count).apply();
-    }
-
-    public void addShotCounterSet(String name) {
-        // Retrieve the values
+    public void addShotCounter(String name) {
         Set<String> set = getShotCounterSet();
         set.add(name);
         preferences.edit().putStringSet(SHOT_COUNTER_LIST_KEY, set).apply();

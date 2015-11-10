@@ -14,7 +14,6 @@ public class ShotsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shots);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
 
 }
