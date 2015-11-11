@@ -63,9 +63,10 @@ public class MainActivity extends StandardActivity {
 
     @OnItemClick(R.id.shots_list)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String name = PreferencesManager.get().getShotCounterList().get(position);
+        String counterName = PreferencesManager.get().getShotCounterList().get(position);
         Intent intent = new Intent(this, ShotCounterFormActivity.class);
-        intent.putExtra(ShotCounterFormActivity.SHOT_COUNTER_NAME_KEY, name);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.putExtra(ShotCounterFormActivity.SHOT_COUNTER_NAME_KEY, counterName);
         startActivity(intent);
     }
 

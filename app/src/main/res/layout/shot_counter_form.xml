@@ -83,7 +83,7 @@
             app:rd_maxRippleRadius="match_view"
             app:rd_rippleAnimDuration="150"
             app:rd_enable="true"
-            app:rd_delayClick="afterRelease"/>
+            app:rd_delayClick="untilRelease"/>
 
     </LinearLayout>
 
