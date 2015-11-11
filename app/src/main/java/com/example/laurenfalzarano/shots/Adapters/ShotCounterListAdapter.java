@@ -65,13 +65,15 @@ public class ShotCounterListAdapter extends BaseAdapter {
     public static class ViewHolder {
         @Bind(R.id.count) TextView shotsCount;
         @Bind(R.id.list_name)TextView listName;
+        @Bind(R.id.count_increment) View countIncrement;
+        @Bind(R.id.count_decrement) View countDecrement;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }
 
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         final ViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,6 +88,29 @@ public class ShotCounterListAdapter extends BaseAdapter {
 
         holder.listName.setText(names.get(position));
         holder.shotsCount.setText(count);
+        holder.countIncrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = PreferencesManager.get().getNumShotsForCounter(names.get(position));
+                if (count < 999) {
+                    count++;
+                    PreferencesManager.get().setShotsCount(names.get(position), count);
+                    holder.shotsCount.setText(String.valueOf(count));
+                }
+            }
+        });
+
+        holder.countDecrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = PreferencesManager.get().getNumShotsForCounter(names.get(position));
+                if (count > 0) {
+                    count--;
+                    PreferencesManager.get().setShotsCount(names.get(position), count);
+                    holder.shotsCount.setText(String.valueOf(count));
+                }
+            }
+        });
 
         return view;
     }

@@ -10,6 +10,8 @@
     <string name="fa_angle_left">{fa-angle-left}</string>
     <string name="title_activity_shots">Edit Shots Counter</string>
     <string name="fa_angle_right">{fa-angle-right}</string>
+    <string name="fa_caret_up">{fa-caret-up}</string>
+    <string name="fa_caret_down">{fa-caret-down}</string>
 
     <string name="confirm_deletion_title">Confirm Deletion</string>
     <string name="confirm_deletion_content">Are you sure you want to delete the shot counter \"</string>
